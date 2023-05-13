@@ -1,0 +1,174 @@
+:root{
+ --bg-color:#2b4344;
+ --color-2:#ffffff;
+ --color-3:#f94047;
+ --color-4:#FE7a5a;
+ --color-5:#ffaf5f;
+}
+
+body{
+  background-color: var(--bg-color);
+ /* animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+*/
+  font-family:'Roboto', sans-serif;
+  color: var(--color-2);
+}
+.hello{
+  margin:0 auto;
+  text-align:center;
+}
+.eurovision{
+ position:absolute;
+ right:0;
+ width:25vw;
+ overflow:hidden;
+ opacity:0.2;
+}
+img{
+ width:200%;
+ position:relative;
+ left:-50%;
+}
+.BINGO{
+  display:block;
+ margin:0 auto;
+ width:50%;
+}
+.row{
+ width:100%;
+ aspect-ratio:5/1;
+ display:grid;
+ grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+ overflow:hidden;
+}
+.field{
+ margin:0.1em;
+ position:relative;
+ outline:1px solid var(--color-5);
+ font-size:clamp(0.5rem, 4rem, 1.2vw);
+}
+input[type=checkbox]{
+ position:absolute;
+ top:1em;
+ left:2em;
+ z-index:-1;
+}
+input[type=checkbox] + label{
+ background-color:var(--bg-color);
+ position:absolute;
+ width:100%;
+ height:100%;
+ text-align:center;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ word-break:break-word;
+}
+input[type=checkbox]:checked + label{
+ background-color:var(--color-3);
+}
+footer{
+ position:fixed;
+ bottom:0;
+}
+
+ #popup2:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+  color:var(--bg-color);
+}
+
+#popup2:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #ffffffe3;
+  z-index: -1;
+  color:var(--bg-color);
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  align-self: center;
+  justify-self: center;
+  padding: 20px;
+  width: 280px;
+  height: fit-content;
+  top: 30%;
+  background: #ffffff00;
+  z-index: 20;
+  color:var(--bg-color);
+}
+
+.important{
+  color: var(--color-3);
+  font-weight: 600;
+  text-shadow: #ffffff;
+}
+
+button {
+  font-size: 1.2rem;
+  margin-right: 1em;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border-color: var(--color-3);
+  background-color: var(--color-4);
+  box-shadow:
+          0px 0px 10px 2px var(--color-3);
+}
+
+button.small  {
+  font-size: 1em;
+  padding: 2px 5px;
+  margin: 0.3em;
+}
+
+
+button:focus, button:hover{
+  cursor: pointer;
+  border-color: var(--color-5);
+  box-shadow:
+          0px 0px 10px 2px white,
+          0px 0px 20px 4px var(--color-5);
+}
+
+.bingonew{
+  display: grid;
+  margin:0 auto;
+  width:50%;
+  aspect-ratio: 1;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+@media screen and (max-width: 600px){
+  .BINGO{
+   width:100%;
+  }
+ .field{
+  font-size:clamp(0.1rem, 4rem, 2.5vw);
+ }
+ .eurovision{
+  bottom:-25%;
+  width:100vw;
+ }
+ img{
+  width:100%;
+  left:0;
+ }
+
+}
