@@ -47,25 +47,61 @@ let finput1 = "";
 let finput2 = "";
 let finput3 = "";
 let felder = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,f21,f22,f23,f24,f25,f26,f27,f28,f29,f30,f31,f32,f33,f34,f35,f36,f37,f38,f39];
+let checked = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 
-
-init(); 
+if(localStorage.getItem("checked") === null){
+  localStorage.setItem("checked", JSON.stringify(checked));
+} else {
+  checked = JSON.parse( localStorage.getItem("checked"));
+  loadChecked();
+}
 
 function init(){
   startPopUp();
   addallEventListeners();
   getWinScreen();
 }
+init(); 
 
 function startPopUp(){
-    document.getElementById("submit").addEventListener("click", function(){submitOnClick();})
-
+    document.getElementById("submit").addEventListener("click", submitOnClick);
+    if(localStorage.getItem("popupClosed")){
+      hide("popup2");
+      submitOnClick();
+    }
 }
 
 function addallEventListeners(){
   let fields = document.getElementsByClassName("field");
   for(let i=0; i<fields.length; i++){
-    fields[i].addEventListener("click", function(){checkBingo(i);})
+    fields[i].addEventListener("click", function(e){
+      checkBingo(i);
+      setCheckedOnLS(i);
+      e.stopPropagation();
+      e.preventDefault();
+    })
+  }
+}
+
+
+function setCheckedOnLS(field){
+  cb = document.getElementById("f" + field);
+  if(checked[field]){
+    checked[field] = false;
+    cb.checked = false;
+  } else {
+    checked[field] = true;
+    cb.checked = true;
+  }
+  localStorage.setItem("checked", JSON.stringify(checked));
+}
+
+function loadChecked(){
+  let fields = document.getElementsByClassName("field");
+  for(let i=0; i<fields.length; i++){
+    if(checked[i]){
+      fields[i].firstChild.checked = true;
+    }
   }
 }
 
@@ -159,8 +195,16 @@ function submitOnClick(){
  finput2 = document.getElementById("joker2").value;
  finput3 = document.getElementById("joker3").value;
  hide("popup2");
- NEWgenerateInputFields();
-
+ localStorage.setItem("popupClosed", true);
+ //check if randomized on local
+ if(localStorage.getItem("felder") === null){
+  //nicht vorhanden
+  randomizeArray(felder);
+  localStorage.setItem("felder", JSON.stringify(felder));
+  } else {
+    felder = JSON.parse(localStorage.getItem("felder"));
+  }
+  NEWgenerateInputFields();
 }
 
 function hide (id) {
@@ -168,10 +212,25 @@ function hide (id) {
 }
 
 
+function generateInputFields(){
+  randomizeArray(felder);
+  checkInputs();
+  var newHtml = "";
+ for (var i=0; i<25; i++){
+   if(i%5==0){
+     newHtml += '<div class="row">'
+   }
+   newHtml += '<div class="field"><input type="checkbox" id="f' + i + '"> <label for="f' + i + '">' + felder[i] + '</label></div>';
+  // if (i==4||i==9|| i==14|| i==19|| i==24){
+  if ((i-4)%5==0){
+     newHtml+= '</div>';
+   }
+  }
 
+  document.getElementById("bingo").innerHTML = newHtml;
+}
 // NEUE FUNKTION DOM MANIPULATION
 function NEWgenerateInputFields(){
-  randomizeArray(felder);
   checkInputs();
   for(var i=0; i<25; i++){
     document.getElementById("l" + i).innerHTML = felder[i];

@@ -65,6 +65,7 @@ input[type=checkbox] + label{
  align-items:center;
  justify-content:center;
  word-break:break-word;
+ user-select: none;
 }
 input[type=checkbox]:checked + label{
  background-color:var(--color-3);
@@ -74,42 +75,43 @@ footer{
  bottom:0;
 }
 
- #popup2:after {
-  position: fixed;
-  content: "";
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: -2;
-  color:var(--bg-color);
+.popup-outer{
+  position:fixed;
+  top:0;
+  left:0;
+  min-height:600px;
+  height:100vh;
+  width:100vw;
+  display:grid;
+  justify-items: center;
+  align-items: center;
+  z-index:100;
 }
-
-#popup2:before {
+.popup-outer::after {
   position: absolute;
+  overflow:hidden;
   content: "";
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
-  background: #ffffffe3;
-  z-index: -1;
-  color:var(--bg-color);
+  width:100vw;
+  height:100vh;
+  background: rgba(0,0,0,0.5);
+  
+  
 }
 
 .popup {
   display: block;
-  position: fixed;
-  align-self: center;
-  justify-self: center;
+  position:absolute;
   padding: 20px;
   width: 280px;
   height: fit-content;
-  top: 30%;
-  background: #ffffff00;
-  z-index: 20;
+  background-color: #ffffff;
+  z-index:101;
   color:var(--bg-color);
+  /* top:50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%); */
 }
 
 .popup h1 {
