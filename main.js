@@ -1,6 +1,7 @@
 /**
-* ESC 2022 Bingo Spiel
+* ESC 2023 Bingo Spiel
 * @version: 1.1
+* @author: aliciaberthel
 */
 const f1="Deutschland wird Letzter";
 const f2="Peter Urban ist passiv-aggressiv";
@@ -107,10 +108,12 @@ function loadChecked(){
 function checkBingo(field){
   if(verticalWin(field) || horizontalWin(field) || diagonalWin(field)){
     console.log("GEWONNEN");
+    getWinScreen();
   }
-  else {
-    console.log("VERLOREN");
-  }
+}
+
+function getWinScreen(){
+  document.getElementById("popupwin").style.display = "block";
 }
 
 function verticalWin(field){
@@ -123,7 +126,6 @@ function verticalWin(field){
   return win; 
 }
 
-//stürzt ab?? schafft for schleife nicht, warum. 
 function horizontalWin(field){
   let win = true;
   let start = field % 5;
@@ -134,7 +136,36 @@ function horizontalWin(field){
 }
 
 function diagonalWin(field){
-  return false;
+   return (diagonalWin1(field) || diagonalWin2(field));
+
+}
+
+
+function diagonalWin1(field){
+  let win = true;
+  if(field % 6 == 0){
+    for(let i=0; i<= 24; i+=6){
+      win = win && document.getElementById("f"+i).checked;
+    }
+    return win; 
+  }
+  else{
+    return false;
+  }
+
+}
+
+function diagonalWin2(field){
+  let win = true;
+  if(field % 4 == 0){
+    for(let i=4; i<= 20; i+=4){
+      win = win && document.getElementById("f"+i).checked;
+    }
+    return win; 
+  }
+  else{
+    return false;
+  }
 }
 
 function submitOnClick(){
@@ -158,6 +189,24 @@ function hide (id) {
   document.getElementById(id).style.display ='none';
 }
 
+
+function generateInputFields(){
+  randomizeArray(felder);
+  checkInputs();
+  var newHtml = "";
+ for (var i=0; i<25; i++){
+   if(i%5==0){
+     newHtml += '<div class="row">'
+   }
+   newHtml += '<div class="field"><input type="checkbox" id="f' + i + '"> <label for="f' + i + '">' + felder[i] + '</label></div>';
+  // if (i==4||i==9|| i==14|| i==19|| i==24){
+  if ((i-4)%5==0){
+     newHtml+= '</div>';
+   }
+  }
+
+  document.getElementById("bingo").innerHTML = newHtml;
+}
 // NEUE FUNKTION DOM MANIPULATION
 function NEWgenerateInputFields(){
   checkInputs();
@@ -166,11 +215,7 @@ function NEWgenerateInputFields(){
   }
 }
 
-// let message = document.createElement("span");
-// 		let text = field.parentElement.firstElementChild.innerHTML + " " + explanation + "!";
-// 		console.log(text);
-// 		message.appendChild(document.createTextNode(text));
-// 		field.parentElement.appendChild(message);
+
 
 function randomizeArray(arr){
   for (var i = arr.length-1; i>0; i--){

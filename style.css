@@ -114,6 +114,24 @@ footer{
   transform:translateX(-50%) translateY(-50%); */
 }
 
+.popup h1 {
+  color: var(--color-3);
+  text-shadow: 2px 2px 8px #ffffff;
+  animation: colorchangefx 2s linear infinite;
+  animation-direction: alternate;
+}
+
+@keyframes colorchangefx {
+  0% {
+      color:var(--color-3);
+  }
+  50% {
+     color:var(--color-4);
+  }
+  100% {
+     color:var(--color-5);
+  }
+}
 
 
 .important{
@@ -176,3 +194,4 @@ button:focus, button:hover{
  }
 
 }
+
