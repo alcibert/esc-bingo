@@ -176,6 +176,10 @@ button:focus, button:hover{
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
+a{
+  color:#ffffff;
+}
+
 
 @media screen and (max-width: 600px){
   .BINGO{

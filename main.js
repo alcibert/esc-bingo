@@ -29,24 +29,27 @@ const f23="Peter Urban erwähnt, dass es sein letzter ESC ist";
 const f24="im Greenroom wird gesoffen";
 const f25="random Schloss oder Burg im Einspieler";
 const f26="Ein Host singt"
-const f27="Hosts sind awkward"
+const f27="der Gewinner ist ein Solokünstler"
 const f28="Jemand wedelt mit einem Glowstick";
 const f29="Ein*e Punkte-Korrespondet*in ist ehemalige*r ESC-Teilnehmer*in";
 const f30="Die Hosts reden synchron";
 const f31="Jegliche queere Flagge";
 const f32="technische Panne";
 const f33="Nebelmaschine!! Wo ist die B&uuml;hne???";
-const f34="Ukrainische Flaggenfarben SUBTIL im B&uuml;hnenbild untergebracht";
+const f34="etwas 'unpolitisch politisches'";
 const f35="die Franzosen weigern sich englisch zu sprechen";
 const f36="Alexander Rybak";
-const f37="Corona wird angesprochen";
+const f37="tanzen im Liegen";
 const f38 = "jemand macht ein Handherz";
 const f39 = "jemand weint";
+const f40 = "Bandmitglieder küssen sich";
+const f41 = "queerbaiting";
+const f42 = "Jemand aus euer Watchparty spricht über LENA";
 
 let finput1 = "";
 let finput2 = "";
 let finput3 = "";
-let felder = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,f21,f22,f23,f24,f25,f26,f27,f28,f29,f30,f31,f32,f33,f34,f35,f36,f37,f38,f39];
+let felder = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,f21,f22,f23,f24,f25,f26,f27,f28,f29,f30,f31,f32,f33,f34,f35,f36,f37,f38,f39,f40,f41];
 let checked = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 
 if(localStorage.getItem("checked") === null){
@@ -74,8 +77,8 @@ function addallEventListeners(){
   let fields = document.getElementsByClassName("field");
   for(let i=0; i<fields.length; i++){
     fields[i].addEventListener("click", function(e){
-      checkBingo(i);
       setCheckedOnLS(i);
+      checkBingo(i);
       e.stopPropagation();
       e.preventDefault();
     })
@@ -113,7 +116,13 @@ function checkBingo(field){
 }
 
 function getWinScreen(){
-  document.getElementById("popupwin").style.display = "block";
+  document.getElementById("popupwin").style.display = "grid";
+  let refresh = document.getElementById("refresh");
+  refresh.addEventListener("click", function(){
+    localStorage.clear();
+    location.reload();
+  })
+  
 }
 
 function verticalWin(field){
