@@ -59,7 +59,6 @@ if(localStorage.getItem("checked") === null){
 function init(){
   startPopUp();
   addallEventListeners();
-  getWinScreen();
 }
 init(); 
 
@@ -114,28 +113,7 @@ function checkBingo(field){
 }
 
 function getWinScreen(){
-  // let message = document.createElement("span");
-// 		let text = field.parentElement.firstElementChild.innerHTML + " " + explanation + "!";
-// 		console.log(text);
-// 		message.appendChild(document.createTextNode(text));
-// 		field.parentElement.appendChild(message);
-
-  let winmsg = document.createElement("div");
-  winmsg.classList.add("popup" , "win");
-  let wintext = document.createElement("h1");
-  wintext.appendChild(document.createTextNode("GEWONNEN!"));
-  let congtext = document.createElement("p");
-  congtext.appendChild(document.createTextNode("SLAAAYY QUEEEEEN! Du hast gewonnen! 15 Punkte für dich."));
-  let refreshbtn = document.createElement("button");
-  refreshbtn.setAttribute('id', 'refresh');
-  refreshbtn.appendChild(document.createTextNode("Erneut spielen"));
-
-
-  winmsg.appendChild(wintext);
-  winmsg.appendChild(congtext);
-  winmsg.appendChild(refreshbtn);
-
-  document.getElementById("popup2").insertBefore(winmsg, null);
+  document.getElementById("popupwin").style.display = "block";
 }
 
 function verticalWin(field){
