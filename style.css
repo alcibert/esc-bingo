@@ -99,7 +99,7 @@ footer{
 }
 
 .popup {
-  display: none;
+  display: block;
   position: fixed;
   align-self: center;
   justify-self: center;
@@ -111,6 +111,26 @@ footer{
   z-index: 20;
   color:var(--bg-color);
 }
+
+.popup h1 {
+  color: var(--color-3);
+  text-shadow: 2px 2px 8px #ffffff;
+  animation: colorchangefx 2s linear infinite;
+  animation-direction: alternate;
+}
+
+@keyframes colorchangefx {
+  0% {
+      color:var(--color-3);
+  }
+  50% {
+     color:var(--color-4);
+  }
+  100% {
+     color:var(--color-5);
+  }
+}
+
 
 .important{
   color: var(--color-3);
@@ -172,3 +192,4 @@ button:focus, button:hover{
  }
 
 }
+

@@ -1,6 +1,7 @@
 /**
-* ESC 2022 Bingo Spiel
+* ESC 2023 Bingo Spiel
 * @version: 1.1
+* @author: aliciaberthel
 */
 const f1="Deutschland wird Letzter";
 const f2="Peter Urban ist passiv-aggressiv";
@@ -53,10 +54,10 @@ init();
 function init(){
   startPopUp();
   addallEventListeners();
+  getWinScreen();
 }
 
 function startPopUp(){
-    document.getElementById("popup2").style.display ='block';
     document.getElementById("submit").addEventListener("click", function(){submitOnClick();})
 
 }
@@ -72,10 +73,33 @@ function addallEventListeners(){
 function checkBingo(field){
   if(verticalWin(field) || horizontalWin(field) || diagonalWin(field)){
     console.log("GEWONNEN");
+    getWinScreen();
   }
-  else {
-    console.log("VERLOREN");
-  }
+}
+
+function getWinScreen(){
+  // let message = document.createElement("span");
+// 		let text = field.parentElement.firstElementChild.innerHTML + " " + explanation + "!";
+// 		console.log(text);
+// 		message.appendChild(document.createTextNode(text));
+// 		field.parentElement.appendChild(message);
+
+  let winmsg = document.createElement("div");
+  winmsg.classList.add("popup" , "win");
+  let wintext = document.createElement("h1");
+  wintext.appendChild(document.createTextNode("GEWONNEN!"));
+  let congtext = document.createElement("p");
+  congtext.appendChild(document.createTextNode("SLAAAYY QUEEEEEN! Du hast gewonnen! 15 Punkte für dich."));
+  let refreshbtn = document.createElement("button");
+  refreshbtn.setAttribute('id', 'refresh');
+  refreshbtn.appendChild(document.createTextNode("Erneut spielen"));
+
+
+  winmsg.appendChild(wintext);
+  winmsg.appendChild(congtext);
+  winmsg.appendChild(refreshbtn);
+
+  document.getElementById("popup2").insertBefore(winmsg, null);
 }
 
 function verticalWin(field){
@@ -88,18 +112,46 @@ function verticalWin(field){
   return win; 
 }
 
-//stürzt ab?? schafft for schleife nicht, warum. 
 function horizontalWin(field){
   let win = true;
   let start = field % 5;
-  for(let i=start; i< start+20; i+5){
+  for(let i=start; i< start+20; i+=5){
        win = win && document.getElementById("f"+i).checked;
   }
   return win; 
 }
 
 function diagonalWin(field){
-  return false;
+   return (diagonalWin1(field) || diagonalWin2(field));
+
+}
+
+
+function diagonalWin1(field){
+  let win = true;
+  if(field % 6 == 0){
+    for(let i=0; i<= 24; i+=6){
+      win = win && document.getElementById("f"+i).checked;
+    }
+    return win; 
+  }
+  else{
+    return false;
+  }
+
+}
+
+function diagonalWin2(field){
+  let win = true;
+  if(field % 4 == 0){
+    for(let i=4; i<= 20; i+=4){
+      win = win && document.getElementById("f"+i).checked;
+    }
+    return win; 
+  }
+  else{
+    return false;
+  }
 }
 
 function submitOnClick(){
@@ -116,23 +168,7 @@ function hide (id) {
 }
 
 
-function generateInputFields(){
-  randomizeArray(felder);
-  checkInputs();
-  var newHtml = "";
- for (var i=0; i<25; i++){
-   if(i%5==0){
-     newHtml += '<div class="row">'
-   }
-   newHtml += '<div class="field"><input type="checkbox" id="f' + i + '"> <label for="f' + i + '">' + felder[i] + '</label></div>';
-  // if (i==4||i==9|| i==14|| i==19|| i==24){
-  if ((i-4)%5==0){
-     newHtml+= '</div>';
-   }
-  }
 
-  document.getElementById("bingo").innerHTML = newHtml;
-}
 // NEUE FUNKTION DOM MANIPULATION
 function NEWgenerateInputFields(){
   randomizeArray(felder);
@@ -142,11 +178,7 @@ function NEWgenerateInputFields(){
   }
 }
 
-// let message = document.createElement("span");
-// 		let text = field.parentElement.firstElementChild.innerHTML + " " + explanation + "!";
-// 		console.log(text);
-// 		message.appendChild(document.createTextNode(text));
-// 		field.parentElement.appendChild(message);
+
 
 function randomizeArray(arr){
   for (var i = arr.length-1; i>0; i--){
