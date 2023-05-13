@@ -56,8 +56,7 @@ function init(){
 }
 
 function startPopUp(){
-    document.getElementById("popup2").style.display ='block';
-    document.getElementById("submit").addEventListener("click", function(){submitOnClick();})
+    document.getElementById("submit").addEventListener("click", submitOnClick)
 
 }
 
@@ -92,7 +91,7 @@ function verticalWin(field){
 function horizontalWin(field){
   let win = true;
   let start = field % 5;
-  for(let i=start; i< start+20; i+5){
+  for(let i=start; i< start+20; i+=5){
        win = win && document.getElementById("f"+i).checked;
   }
   return win; 
