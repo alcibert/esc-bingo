@@ -87,7 +87,7 @@ input[type=checkbox] + label{
  justify-content:center;
  word-break:break-word;
  user-select: none;
-
+ cursor: pointer;
 }
 
 input[type=checkbox]:checked + label{
