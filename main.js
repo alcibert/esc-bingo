@@ -181,6 +181,9 @@ function submitOnClick(){
  finput1 = document.getElementById("joker1").value;
  finput2 = document.getElementById("joker2").value;
  finput3 = document.getElementById("joker3").value;
+ if(! isValidJokers()){
+  return;
+ }
  hide("popup2");
  localStorage.setItem("popupClosed", true);
  //check if randomized on local
@@ -192,6 +195,7 @@ function submitOnClick(){
     felder = JSON.parse(localStorage.getItem("felder"));
   }
   NEWgenerateInputFields();
+  // ToDo: Add Jokers to localStorage
 }
 
 function hide (id) {
@@ -241,7 +245,7 @@ function checkInputs(){
     felder[xyz[0]] = finput1;
     felder[xyz[1]] = finput2;
     felder[xyz[2]] = finput3;
-    console.log(felder);
+    localStorage.setItem("felder", JSON.stringify(felder));
   }
 }
 
@@ -264,4 +268,15 @@ function threeRandomInts(max){
 function roundDown(number, decimals) {
     decimals = decimals || 0;
     return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
+}
+
+function isValidJokers(){
+  let error = 0;
+  if (finput1 == "" || finput2 = "" || finput3 = ""){
+    error += 1;
+  }
+  if (finput1.length < 5 || finput2.length < 5 || finput3.length < 5){
+    error += 1;
+  }
+  return (error == 0);
 }
