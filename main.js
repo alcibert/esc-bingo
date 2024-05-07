@@ -125,7 +125,7 @@ function getWinScreen(){
   
 }
 
-function verticalWin(field){
+function horizontalWin(field){
   let win = true;
   let start = (roundDown(field/5)*5);
 
@@ -135,10 +135,12 @@ function verticalWin(field){
   return win; 
 }
 
-function horizontalWin(field){
+function verticalWin(field){
   let win = true;
   let start = field % 5;
-  for(let i=start; i< start+20; i+=5){
+  console.log("start= "+ start);
+  for(let i=start; i<= start+20; i+=5){
+      console.log("i= "+ i);
        win = win && document.getElementById("f"+i).checked;
   }
   return win; 
