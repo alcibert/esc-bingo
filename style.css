@@ -1,13 +1,28 @@
 :root{
- --bg-color:#2b4344;
+ --bg-color:#eb8c17;
+ --bg-color2:#d6256c;
+ --bg-color3:#d1ce0d;
  --color-2:#ffffff;
- --color-3:#f94047;
- --color-4:#FE7a5a;
- --color-5:#ffaf5f;
+ --color-3:#ff1094;
+ --color-4:#d50055;
+ --color-5:#ffd071;
+ --bg-gradient: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-color2) 50%, var(--bg-color3) 95%);
+ /* --check-gradient: linear-gradient(180deg, var(--color-3) 0%, var(--bg-color) 50%);
+ --checked-gradient: linear-gradient(180deg, var(--color-3) 0%, var(--color-4) 50%); */
+ box-sizing: border-box;
 }
 
+
+
 body{
-  background-color: var(--bg-color);
+  background-color: var(--bg-color3);
+  background: var(--bg-gradient);
+  background-repeat: no-repeat;
+  width:100%;
+  min-height: 100vh;
+  margin:0;
+  overflow-x: hidden;
+
  /* animation: fadeInAnimation ease 3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -26,16 +41,18 @@ body{
  overflow:hidden;
  opacity:0.2;
 }
+
 img{
  width:200%;
  position:relative;
  left:-50%;
+ 
 }
-.BINGO{
-  display:block;
- margin:0 auto;
- width:50%;
+
+h1{
+  font-size: 50px;
 }
+
 .row{
  width:100%;
  aspect-ratio:5/1;
@@ -50,13 +67,17 @@ img{
  font-size:clamp(0.5rem, 4rem, 1.2vw);
 }
 input[type=checkbox]{
+  appearance: none;
+  -webkit-appearance: none;
  position:absolute;
  top:1em;
  left:2em;
  z-index:-1;
+ padding:3px;
 }
+
 input[type=checkbox] + label{
- background-color:var(--bg-color);
+ background-color:rgba(235, 140, 23, 0.616);
  position:absolute;
  width:100%;
  height:100%;
@@ -66,13 +87,24 @@ input[type=checkbox] + label{
  justify-content:center;
  word-break:break-word;
  user-select: none;
+
 }
+
 input[type=checkbox]:checked + label{
  background-color:var(--color-3);
 }
+
+
+
 footer{
- position:fixed;
+ position: fixed;
+ color: var(--color-4);
  bottom:0;
+ width: 100%;
+}
+
+footer a {
+  color:inherit;
 }
 
 .popup-outer{
@@ -96,6 +128,7 @@ footer{
   width:100vw;
   height:100vh;
   background: rgba(0,0,0,0.5);
+
   
   
 }
@@ -108,7 +141,7 @@ footer{
   height: fit-content;
   background-color: #ffffff;
   z-index:101;
-  color:var(--bg-color);
+  color:var(--color-4);
   /* top:50%;
   left:50%;
   transform:translateX(-50%) translateY(-50%); */
@@ -168,6 +201,7 @@ button:focus, button:hover{
 }
 
 .bingonew{
+  position: relative;
   display: grid;
   margin:0 auto;
   width:50%;
@@ -176,15 +210,40 @@ button:focus, button:hover{
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.bingonew::after{
+  content:"";
+  position: absolute;
+  left: 100%;
+  width: 25vw;
+  height: 100%;
+  background-image: url("./Herz.png");
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  
+  
+}
+
 a{
   color:#ffffff;
 }
 
 
 @media screen and (max-width: 600px){
-  .BINGO{
-   width:100%;
+  .bingonew{
+   width: 94%;
+   margin: 0 3%;
   }
+
+  .bingonew::after{
+    left: 0;
+    top: 100%;
+    width: 80vw;
+    height: 20vh;
+    overflow: hidden;
+    background-size: 50%;  }
+
  .field{
   font-size:clamp(0.1rem, 4rem, 2.5vw);
  }
