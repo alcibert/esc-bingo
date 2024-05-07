@@ -69,7 +69,7 @@ function startPopUp(){
     document.getElementById("submit").addEventListener("click", submitOnClick);
     if(localStorage.getItem("popupClosed")){
       hide("popup2");
-      submitOnClick();
+      buildApp();
     }
 }
 
@@ -185,7 +185,11 @@ function submitOnClick(){
   return;
  }
  hide("popup2");
- localStorage.setItem("popupClosed", true);
+ buildApp();
+}
+
+function buildApp(){
+  localStorage.setItem("popupClosed", true);
  //check if randomized on local
  if(localStorage.getItem("felder") === null){
   //nicht vorhanden
@@ -197,7 +201,6 @@ function submitOnClick(){
   NEWgenerateInputFields();
   // ToDo: Add Jokers to localStorage
 }
-
 function hide (id) {
   document.getElementById(id).style.display ='none';
 }
@@ -272,7 +275,7 @@ function roundDown(number, decimals) {
 
 function isValidJokers(){
   let error = 0;
-  if (finput1 == "" || finput2 = "" || finput3 = ""){
+  if (finput1 == "" || finput2 == "" || finput3 == ""){
     error += 1;
   }
   if (finput1.length < 5 || finput2.length < 5 || finput3.length < 5){
